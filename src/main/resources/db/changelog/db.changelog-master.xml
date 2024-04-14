@@ -8,7 +8,8 @@
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
 http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
 http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-    <changeSet id="202010211812" author="Julius Krah">
+    <changeSet id="202010211812" author="Julius Krah" >
+        <sqlFile path="/db/changelog/sql_migration/14042024-test.sql"/>
         <createTable tableName="house">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="house_id_pk" />
@@ -32,8 +33,15 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
         <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />
         <addForeignKeyConstraint baseTableName="item" baseColumnNames="house_id" constraintName="item_house_id_fk" referencedTableName="house" referencedColumnNames="id" />
     </changeSet>
-    <changeSet id="12042024" author="kristain putra">
+    <changeSet id="14042024" author="Kristain Putra">
+        <dropForeignKeyConstraint baseTableName="item" constraintName="item_house_id_fk"/>
         <dropTable tableName="house"/>
-        <dropTable tableName="item" />
+        <dropTable tableName="item"/>
+    </changeSet>
+    <changeSet id="120420240001" author="Kristain">
+        <sqlFile path="/db/changelog/sql_migration/14042024-test2.sql" />
+        <createTable tableName="Test1">
+            <column name="Test1" type="varchar(50)"></column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>
